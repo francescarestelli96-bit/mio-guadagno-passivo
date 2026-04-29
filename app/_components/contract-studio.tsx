@@ -59,6 +59,8 @@ type ContractStudioProps = {
   onOpenPlans: () => void;
   onAccessChange: (access: AccessState) => void;
   demoMode?: boolean;
+  /** Se true, OPENAI_API_KEY è configurata e la chat può essere mostrata. */
+  chatEnabled?: boolean;
 };
 
 const verdictCopy = {
@@ -240,6 +242,7 @@ export function ContractStudio({
   onOpenPlans,
   onAccessChange,
   demoMode = false,
+  chatEnabled = false,
 }: ContractStudioProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [text, setText] = useState("");
@@ -1173,7 +1176,7 @@ export function ContractStudio({
       </section>
     </div>
 
-    {analysis && !demoMode && (
+    {analysis && !demoMode && chatEnabled && (
       <ChatPanel
         contractText={text}
         analysis={analysis}

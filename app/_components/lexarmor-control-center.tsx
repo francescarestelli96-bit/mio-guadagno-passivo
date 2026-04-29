@@ -234,8 +234,11 @@ const demoBanner: CheckoutBanner = {
 
 export function LexArmorControlCenter({
   demoMode = false,
+  chatEnabled = false,
 }: {
   demoMode?: boolean;
+  /** True solo se OPENAI_API_KEY è valorizzata: abilita la chat post-analisi. */
+  chatEnabled?: boolean;
 }) {
   const tabs = demoMode ? demoTabs : fullTabs;
   const [activeTab, setActiveTab] = useState<TabId>(
@@ -428,6 +431,7 @@ export function LexArmorControlCenter({
               }
               onAccessChange={setAccess}
               demoMode={demoMode}
+              chatEnabled={chatEnabled}
             />
           ) : null}
           {activeTab === "plans" && !demoMode ? (
